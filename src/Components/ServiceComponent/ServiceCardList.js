@@ -9,10 +9,8 @@ const ServiceCardList = ({ people }) => {
             return (
               <ServiceCard
                 key={i}
-                height={people.height}
-                name={people.name}
-                gender={people.gender}
-                haircolor={people.hair_color}
+                index={i}
+                people={people}
               />
             )
           })
