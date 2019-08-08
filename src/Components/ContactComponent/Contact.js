@@ -12,8 +12,8 @@ const Contact = () => {
         <div className='flex flex-column flex-row-l justify-around ma3'>
           <div className='flex flex-column justify-between w-100 mh3-l'>
             <input className={`mb3 ${inputClasses}`} type="text" placeholder='Your Name *'/>
-            <input className={`mb3 ${inputClasses}`} type="text" placeholder='Your Name *'/>
-            <input className={`mb3 ${inputClasses}`} type="text" placeholder='Your Name *'/>
+            <input className={`mb3 ${inputClasses}`} type="email" placeholder='Your Email *'/>
+            <input className={`mb3 ${inputClasses}`} type="tel" placeholder='Your Phone *'/>
           </div>
           <div className='w-100 mb3-l'>
             <textarea className={`w-100 h-100 resize-none ${inputClasses}`} name="message" id="message" placeholder='Your Message *'></textarea>
