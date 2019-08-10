@@ -2,7 +2,7 @@ import React from 'react';
 import marketing from '../assets/marketing.jpg';
 import dev from '../assets/dev.jpg';
 import coding from '../assets/coding.jpg';
-import './About.css';
+import '../Components/About.css';
 import AboutInfo from '../Components/AboutInfo';
 
 

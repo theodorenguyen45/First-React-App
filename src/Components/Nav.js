@@ -1,6 +1,6 @@
 import React from 'react';
 import Logo from './Logo';
-import '../services/Header.css';
+import './Header.css';
 import NavMenu from './NavMenu';
 
 const Nav = () => {    

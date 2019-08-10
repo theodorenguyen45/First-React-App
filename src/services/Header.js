@@ -1,6 +1,6 @@
 import React from 'react';
 import Nav from '../Components/Nav';
-import './Header.css';
+import '../Components/Header.css';
 import TellMeMore from '../Components/TellMeMore';
 
 const Header = () => {
