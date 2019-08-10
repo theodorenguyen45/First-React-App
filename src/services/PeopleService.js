@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
-import ServiceCardList from './ServiceCardList';
-import SearchBox from './SearchBox';
+import PeopleCardList from './PeopleCardList';
+import SearchBox from '../Components/SearchBox';
 
 
-class Service extends Component {
+class PeopleService extends Component {
 	constructor() {
 		super();
 		this.state = {
@@ -21,7 +21,8 @@ class Service extends Component {
 		this.fetchUsers()
 		.then(people => this.setState({
 			people: people.results
-		}));
+    }))
+    .catch((err) => console.log(err));
   }
   
   onSearchChange = (event) => {
@@ -42,7 +43,7 @@ class Service extends Component {
 					<div className='flex items-center justify-around flex-row-l flex-column ma3'>
 						{
 							Object.keys(people).length > 0 ? (
-								<ServiceCardList people={filtered}/>
+								<PeopleCardList people={filtered}/>
 							) : (
 								<p className='tc'>Loading</p>
 							)
@@ -54,4 +55,4 @@ class Service extends Component {
 	}
 }
 
-export default Service;
+export default PeopleService;

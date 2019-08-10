@@ -1,20 +1,16 @@
 import React, {Component} from 'react';
-import Header from './Components/HeaderComponent/Header';
-import Service from './Components/ServiceComponent/Service';
-import About from './Components/AboutComponent/About';
-import Contact from './Components/ContactComponent/Contact';
-import Footer from './Components/FooterComponent/Footer';
+import Header from './services/Header';
+import PeopleService from './services/PeopleService';
+import About from './services/About';
+import Contact from './Components/Contact';
+import Footer from './Components/Footer';
 
 export default class App extends Component{
-  // constructor() {
-  //   super();
-  // }
-
   render(){
     return(
       <div>
         <Header />
-        <Service />
+        <PeopleService />
         <About />
         <Contact />
         <Footer />
