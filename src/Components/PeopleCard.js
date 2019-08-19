@@ -5,7 +5,7 @@ class ServiceCard extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      isClicked: false
+      isClicked: false,
     }
   }
 
@@ -16,7 +16,7 @@ class ServiceCard extends Component {
   }
   
   render() {
-    return (
+    return (     
       <li className='flex items-center bg-light-green dib pa3 ma2 grow shadow-5 ba b--orange pointer relative' onClick={this.onClickServiceCard}>
         <img src={`https://robohash.org/${this.props.index}`} alt='robot' style={{ height: '100px', width: '100px', order: '2' }} />
         <div className='tl'>
@@ -25,12 +25,6 @@ class ServiceCard extends Component {
           <p><label className='orange'>Height: </label>{this.props.people.height}</p>
           <p><label className='orange'>Hair Color: </label>{this.props.people.hair_color}</p>
         </div>
-        {
-          this.state.isClicked && <div style={{ width: '500px', height: '500px', background: 'orange', zIndex: '100', position: 'absolute' }}>
-            <p><label className='orange'>Gender: </label>{this.props.people.gender}</p>
-          </div>
-        }
-
       </li>
     );
   }

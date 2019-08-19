@@ -11,18 +11,15 @@ class PeopleService extends Component {
       searchField: ''
 		}
 	};
-
-	async fetchUsers() {
-		const response = await fetch('https://swapi.co/api/people/');
-		return response.json();
-	}
+  
+  fetchUsers = () => fetch('https://swapi.co/api/people/').then(res => res.json())
 
 	componentDidMount(){
 		this.fetchUsers()
-		.then(people => this.setState({
-			people: people.results
-    }))
-    .catch((err) => console.log(err));
+		  .then(people => this.setState({
+			  people: people.results
+      }))
+      .catch((err) => console.log(err));
   }
   
   onSearchChange = (event) => {
