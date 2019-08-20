@@ -13,7 +13,10 @@
     width: 150px;
   }
 
-
+  .custom-grid{
+    display: flex;
+    justify-content: center;
+  }
 }
 
 @media screen and (max-width: 59em){
@@ -28,7 +31,36 @@
     height: 100px;
     width: 100px;
   }
+
+  .custom-grid{
+    display: flex;
+    align-items: center;
+    flex-flow: column wrap;
+  }
 }
 
+.customInput{
+  min-width: 50%;
+}
 
+.background-gradient{
+  background: linear-gradient(89deg, #FF5EDF 0%, #04C9DE 100%);
+}
 
+.bounding-box{
+  position: absolute;
+  box-shadow: 0 0 0 3px #149df2 inset;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  cursor: pointer;
+}
+
+.particeles{
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: 1;
+}
