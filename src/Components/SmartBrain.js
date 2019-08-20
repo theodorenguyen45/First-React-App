@@ -61,7 +61,7 @@ export default class SmartBrain extends Component {
           }
           <Rank />
           <div className='custom-grid'>
-            <input className='customInput f4 pa3 ba b--green bg-lightest-blue' onChange={this.onInputChange} type="text" placeHolder='exp: https://imageurl.com'/>
+            <input className='customInput f4 pa3 ba b--green bg-lightest-blue' onChange={this.onInputChange} type="text" placeholder='exp: https://imageurl.com'/>
             <button className='grow f4 link ph3 pv2 dib white bg-light-purple mt3 ma0-l ml2-l' onClick={this.onButtonSubmit} >Detect</button>
           </div>
         </div>

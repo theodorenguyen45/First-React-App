@@ -21,7 +21,11 @@ export default ({ onRouteChange }) => {
         <main className="pa4 black-80 z-2">
           <form className="measure flex flex-column items-center">
             <fieldset id="sign_up" className="ba b--transparent ph0 mh0 tc">
-              <legend className="f4 fw6 ph0 mh0">Sign In</legend>
+              <legend className="f4 fw6 ph0 mh0">Register</legend>
+              <div className="mt3">
+                <label className="db fw6 lh-copy f6">Name</label>
+                <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="text" name="name" id="name" />
+              </div>
               <div className="mt3">
                 <label className="db fw6 lh-copy f6">Email</label>
                 <input className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100" type="email" name="email-address" id="email-address" />
@@ -35,11 +39,8 @@ export default ({ onRouteChange }) => {
               <input
                 className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
                 type="submit"
-                value="Sign in"
+                value="Register"
                 onClick={() => onRouteChange('home')} />
-            </div>
-            <div className="lh-copy mt3">
-              <p className="f6 link dim black db" onClick={() => onRouteChange('register')}>Register</p>
             </div>
           </form>
         </main>
