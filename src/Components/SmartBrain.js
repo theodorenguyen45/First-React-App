@@ -44,8 +44,7 @@ export default class SmartBrain extends Component {
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input })
     app.models
-      .predict(Clarifai.FACE_DETECT_MODEL,
-        this.state.input)
+      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
       .then(response => {
         if (response) {
           fetch('http://localhost:4000/image', {
@@ -55,10 +54,10 @@ export default class SmartBrain extends Component {
               id: this.props.user.id
             })
           })
-            .then(response => response.json())
-            .then(count => {
-              this.props.updateEntry(count)
-            })
+          .then(res => res.json())
+          .then(count => {
+            this.props.updateEntry(count)
+          })
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
