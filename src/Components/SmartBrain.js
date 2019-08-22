@@ -58,6 +58,7 @@ export default class SmartBrain extends Component {
           .then(count => {
             this.props.updateEntry(count)
           })
+          .catch(err => console.log(err))
         }
         this.displayFaceBox(this.calculateFaceLocation(response))
       })
