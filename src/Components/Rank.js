@@ -1,7 +1,7 @@
 import React from 'react'
 
-export default () => {
+export default ({name, entries}) => {
   return(
-    <h3 className='mt5'>{'Hey. your current rank is...'}</h3>
+    <h3 className='mt5'>{`${name}. your entry count is ${entries}`}</h3>
   )
 }

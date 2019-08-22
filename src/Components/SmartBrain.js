@@ -10,12 +10,12 @@ const app = new Clarifai.App({
 
 
 export default class SmartBrain extends Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       input: '',
       imageUrl: '',
-      box: {}
+      box: {},
     }
   }
 
@@ -46,7 +46,22 @@ export default class SmartBrain extends Component {
     app.models
       .predict(Clarifai.FACE_DETECT_MODEL,
         this.state.input)
-      .then(response => this.displayFaceBox(this.calculateFaceLocation(response)))
+      .then(response => {
+        if (response) {
+          fetch('http://localhost:4000/image', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: this.props.user.id
+            })
+          })
+            .then(response => response.json())
+            .then(count => {
+              this.props.updateEntry(count)
+            })
+        }
+        this.displayFaceBox(this.calculateFaceLocation(response))
+      })
       .catch(err => console.log(err))
   }
 
@@ -56,12 +71,9 @@ export default class SmartBrain extends Component {
         <div id='SmartBrain' className='tc mv5 w-80-l'>
           <h1 className='ttu'>Smart Brain</h1>
           <h3 className='i fw1'>This is a face recognition</h3>
-          {
-            this.state.input.length < 1 && <h3 className='mt5'>In order to use face detection. Simply patse an image url into the text box and click Detect</h3>
-          }
-          <Rank />
+          <Rank name={this.props.user.name} entries={this.props.user.entries} />
           <div className='custom-grid'>
-            <input className='customInput f4 pa3 ba b--green bg-lightest-blue' onChange={this.onInputChange} type="text" placeholder='exp: https://imageurl.com'/>
+            <input className='customInput f4 pa3 ba b--green bg-lightest-blue' onChange={this.onInputChange} type="text" placeholder='Image url goes here...' />
             <button className='grow f4 link ph3 pv2 dib white bg-light-purple mt3 ma0-l ml2-l' onClick={this.onButtonSubmit} >Detect</button>
           </div>
         </div>

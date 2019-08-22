@@ -13,11 +13,36 @@ export default class App extends Component {
   constructor() {
     super();
     this.state = {
-      route: 'signin'
+      route: 'signin',
+      user: {
+        id: '',
+        email: '',
+        name: '',
+        entries: 0,
+        join: '',
+      }
     }
   }
 
-  onRouteChange = (route) => {
+  loadUser = data => {
+    this.setState({
+      user: {
+        id: data.id,
+        email: data.email,
+        name: data.name,
+        entries: data.entries,
+        join: data.join
+      }
+    })
+  }
+
+  updateEntry = count => {
+    this.setState(Object.assign(this.state.user, {
+      entries: count
+    }))
+  }
+
+  onRouteChange = route => {
     this.setState({ route })
   }
 
@@ -27,15 +52,15 @@ export default class App extends Component {
         <>
           <Header onRouteChange={this.onRouteChange} />
           <PeopleService />
-          <SmartBrain />
+          <SmartBrain user={this.state.user} updateEntry={this.updateEntry} />
           <About />
           <Contact />
           <Footer />
         </> :
         this.state.route === 'signin' ?
-          <Signin onRouteChange={this.onRouteChange} />
+          <Signin onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
           :
-          <Register onRouteChange={this.onRouteChange} />
+          <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
 
     );
   }
