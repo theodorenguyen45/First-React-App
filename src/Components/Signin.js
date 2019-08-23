@@ -49,6 +49,7 @@ class Signin extends React.Component {
           this.setState({ err: 'Wrong username or password' })
         }
       })
+      .catch(err => this.setState({ err: 'Wrong username or password' }))
   }
 
   render() {
