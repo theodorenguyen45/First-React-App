@@ -13,7 +13,7 @@ export default class SmartBrain extends Component {
   }
 
   calculateFaceLocation = data => {
-    const calrifaiFace = data.outputs[0].data.regions[0].region_info.bounding_box;
+    const calrifaiFace = data;
     const image = document.getElementById('inputimage');
     const width = Number(image.width);
     const height = Number(image.height);
@@ -36,32 +36,32 @@ export default class SmartBrain extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input })
-      fetch('http://localhost:4000/imageurl', {
-        method: 'POST',
-        headers: {'Content-Type' : 'application/json'},
-        body: JSON.stringify({
-          input: this.state.input
+    fetch('https://guarded-spire-67673.herokuapp.com/imageurl', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        input: this.state.input
+      })
+    })
+    .then(response => response.json())
+    .then(response => {
+      if (response) {
+        this.displayFaceBox(this.calculateFaceLocation(response.outputs[0].data.regions[0].region_info.bounding_box))
+        fetch('https://guarded-spire-67673.herokuapp.com/image', {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            id: this.props.user.id
+          })
         })
-      })
-      .then(response => response.json())
-      .then(response => {
-        if (response) {
-          fetch('http://localhost:4000/image', {
-            method: 'PUT',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-              id: this.props.user.id
-            })
-          })
-          .then(res => res.json())
-          .then(count => {
-            this.props.updateEntry(count)
-          })
-          .catch(err => console.log(err))
-        }
-        this.displayFaceBox(this.calculateFaceLocation(response))
-      })
-      .catch(err => console.log(err))
+        .then(res => res.json())
+        .then(count => {
+          this.props.updateEntry(count)
+        })
+        .catch(err => console.log(err))
+      }
+    })
+    .catch(err => console.log(err))
   }
 
   render() {
