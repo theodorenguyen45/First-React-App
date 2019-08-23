@@ -1,13 +1,6 @@
 import React, { Component } from 'react';
 import Rank from './Rank';
-import Clarifai from 'clarifai'
 import FaceRecognition from './FaceRecognition';
-
-
-const app = new Clarifai.App({
-  apiKey: '712f5d8b674244c3b2a2bb6492f4599a'
-});
-
 
 export default class SmartBrain extends Component {
   constructor(props) {
@@ -43,8 +36,14 @@ export default class SmartBrain extends Component {
 
   onButtonSubmit = () => {
     this.setState({ imageUrl: this.state.input })
-    app.models
-      .predict(Clarifai.FACE_DETECT_MODEL, this.state.input)
+      fetch('http://localhost:4000/imageurl', {
+        method: 'POST',
+        headers: {'Content-Type' : 'application/json'},
+        body: JSON.stringify({
+          input: this.state.input
+        })
+      })
+      .then(response => response.json())
       .then(response => {
         if (response) {
           fetch('http://localhost:4000/image', {

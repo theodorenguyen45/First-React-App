@@ -19,7 +19,8 @@ class Register extends React.Component {
     this.state = {
       email: '',
       password: '',
-      name: ''
+      name: '',
+      err: ''
     }
   }
 
@@ -49,6 +50,8 @@ class Register extends React.Component {
         if (user.id) {
           this.props.loadUser(user);
           this.props.onRouteChange('home');
+        }else{
+          this.setState({err: 'Incorrect form submission'})
         }
       })
   }
@@ -61,6 +64,7 @@ class Register extends React.Component {
             <form className="measure flex flex-column items-center">
               <fieldset id="sign_up" className="ba b--transparent ph0 mh0 tc">
                 <legend className="f4 fw6 ph0 mh0">Register</legend>
+                {this.state.err && <p>{this.state.err}</p>}
                 <div className="mt3">
                   <label className="db fw6 lh-copy f6">Name</label>
                   <input

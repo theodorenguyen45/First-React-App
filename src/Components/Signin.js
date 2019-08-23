@@ -19,7 +19,8 @@ class Signin extends React.Component {
     super(props);
     this.state = {
       signInEmail: '',
-      signInPassword: ''
+      signInPassword: '',
+      err: ''
     }
   }
 
@@ -45,7 +46,7 @@ class Signin extends React.Component {
           this.props.loadUser(user)
           this.props.onRouteChange('home');
         } else {
-          alert('Wrong username or password');
+          this.setState({ err: 'Wrong username or password' })
         }
       })
   }
@@ -59,6 +60,7 @@ class Signin extends React.Component {
             <form className="measure flex flex-column items-center">
               <fieldset id="sign_up" className="ba b--transparent ph0 mh0 tc">
                 <legend className="f4 fw6 ph0 mh0">Sign In</legend>
+                {this.state.err && <p>{this.state.err}</p>}
                 <div className="mt3">
                   <label className="db fw6 lh-copy f6">Email</label>
                   <input
