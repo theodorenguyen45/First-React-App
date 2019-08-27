@@ -88,9 +88,12 @@ class Signin extends React.Component {
                   value="Sign in"
                   onClick={this.onSubmitSignIn} />
               </div>
+              {this.state.err && 
               <div className="lh-copy mt3">
-                <p className="f6 link dim black db" onClick={() => this.props.onRouteChange('register')}>Register</p>
+                <p className="f6 link dim black db" onClick={() => this.props.onRouteChange('register')}>Don't have an account? Click here to register</p>
               </div>
+              }
+              
             </form>
           </main>
         </article>
