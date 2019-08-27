@@ -41,15 +41,15 @@ class Signin extends React.Component {
       })
     })
       .then(res => res.json())
-      .then(user => {
-        if (user.id) {
-          this.props.loadUser(user)
+      .then(res => {
+        if (res.id) {
+          this.props.loadUser(res)
           this.props.onRouteChange('home');
         } else {
-          this.setState({ err: 'Wrong username or password' })
+          this.setState({ err: res })
         }
       })
-      .catch(err => this.setState({ err: 'Wrong username or password' }))
+      .catch(err => this.setState({ err }))
   }
 
   render() {
