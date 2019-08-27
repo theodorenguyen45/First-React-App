@@ -35,7 +35,18 @@ class Register extends React.Component {
     this.setState({ password: event.target.value })
   }
 
+  validateEmail = email => {
+    const regex = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+    return regex.test(String(email).toLowerCase());
+  }
+
   onSubmitRegister = () => {
+    const validEmail = this.validateEmail(this.state.email);
+
+    if(!validEmail){
+      return this.setState({err: 'Please enter a valid email address'})
+    }
+
     fetch('https://guarded-spire-67673.herokuapp.com/register', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
