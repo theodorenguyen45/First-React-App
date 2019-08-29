@@ -1,5 +1,5 @@
 import React from 'react';
-import Particles from 'react-particles-js'
+import Particles from 'react-particles-js';
 
 const particlesOptions = {
   particles: {
@@ -11,8 +11,7 @@ const particlesOptions = {
       }
     }
   }
-}
-
+};
 
 class Signin extends React.Component {
   constructor(props) {
@@ -21,15 +20,15 @@ class Signin extends React.Component {
       signInEmail: '',
       signInPassword: '',
       err: ''
-    }
+    };
   }
 
   onEmailChange = event => {
-    this.setState({ signInEmail: event.target.value })
-  }
+    this.setState({ signInEmail: event.target.value });
+  };
   onPasswordChange = event => {
-    this.setState({ signInPassword: event.target.value })
-  }
+    this.setState({ signInPassword: event.target.value });
+  };
 
   onSubmitSignIn = () => {
     fetch('https://guarded-spire-67673.herokuapp.com/signin', {
@@ -43,62 +42,69 @@ class Signin extends React.Component {
       .then(res => res.json())
       .then(res => {
         if (res.id) {
-          this.props.loadUser(res)
+          this.props.loadUser(res);
           this.props.onRouteChange('home');
         } else {
-          this.setState({ err: res })
+          this.setState({ err: res });
         }
       })
-      .catch(err => this.setState({ err }))
-  }
+      .catch(err => this.setState({ err }));
+  };
 
   render() {
     return (
       <div className='background-gradient absolute h-100 w-100 flex items-center'>
         <Particles className='particeles' params={particlesOptions} />
-        <article className="flex br3 b--black-10 mv4 w-80 w-50-m mw6 shadow-5 center justify-center">
-          <main className="pa4 black-80 z-2">
-            <form className="measure flex flex-column items-center">
-              <fieldset id="sign_up" className="ba b--transparent ph0 mh0 tc">
-                <legend className="f4 fw6 ph0 mh0">Sign In</legend>
+        <article className='flex br3 b--black-10 mv4 w-80 w-50-m mw6 shadow-5 center justify-center'>
+          <main className='pa4 black-80 z-2'>
+            <form className='measure flex flex-column items-center'>
+              <fieldset id='sign_up' className='ba b--transparent ph0 mh0 tc'>
+                <legend className='f4 fw6 ph0 mh0'>Sign In</legend>
                 {this.state.err && <p>{this.state.err}</p>}
-                <div className="mt3">
-                  <label className="db fw6 lh-copy f6">Email</label>
+                <div className='mt3'>
+                  <label className='db fw6 lh-copy f6'>Email</label>
                   <input
                     onChange={this.onEmailChange}
-                    className="pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                    type="email"
-                    name="email-address"
-                    id="email-address" />
+                    className='pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100'
+                    type='email'
+                    name='email-address'
+                    id='email-address'
+                  />
                 </div>
-                <div className="mv3">
-                  <label className="db fw6 lh-copy f6">Password</label>
+                <div className='mv3'>
+                  <label className='db fw6 lh-copy f6'>Password</label>
                   <input
                     onChange={this.onPasswordChange}
-                    className="b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100"
-                    type="password"
-                    name="password"
-                    id="password" />
+                    className='b pa2 input-reset ba bg-transparent hover-bg-black hover-white w-100'
+                    type='password'
+                    name='password'
+                    id='password'
+                  />
                 </div>
               </fieldset>
-              <div className="">
+              <div className=''>
                 <input
-                  className="b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib"
+                  className='b ph3 pv2 input-reset ba b--black bg-transparent grow pointer f6 dib'
                   type='button'
-                  value="Sign in"
-                  onClick={this.onSubmitSignIn} />
+                  value='Sign in'
+                  onClick={this.onSubmitSignIn}
+                />
               </div>
-              {this.state.err && 
-              <div className="lh-copy mt3">
-                <p className="f6 link dim black db" onClick={() => this.props.onRouteChange('register')}>Don't have an account? Click here to register</p>
-              </div>
-              }
-              
+              {this.state.err && (
+                <div className='lh-copy mt3'>
+                  <p
+                    className='f6 link dim black db'
+                    onClick={() => this.props.onRouteChange('register')}
+                  >
+                    Don't have an account? Click here to register
+                  </p>
+                </div>
+              )}
             </form>
           </main>
         </article>
       </div>
-    )
+    );
   }
 }
 

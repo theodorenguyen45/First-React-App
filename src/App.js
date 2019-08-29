@@ -4,12 +4,11 @@ import PeopleService from './services/PeopleService';
 import About from './services/About';
 import Contact from './Components/Contact';
 import Footer from './Components/Footer';
-import SmartBrain from './Components/SmartBrain'
+import SmartBrain from './Components/SmartBrain';
 import Signin from './Components/Signin';
 import Register from './Components/Register';
 
 export default class App extends Component {
-
   constructor() {
     super();
     this.state = {
@@ -19,9 +18,9 @@ export default class App extends Component {
         email: '',
         name: '',
         entries: 0,
-        join: '',
+        join: ''
       }
-    }
+    };
   }
 
   loadUser = data => {
@@ -33,35 +32,35 @@ export default class App extends Component {
         entries: data.entries,
         join: data.join
       }
-    })
-  }
+    });
+  };
 
   updateEntry = count => {
-    this.setState(Object.assign(this.state.user, {
-      entries: count
-    }))
-  }
+    this.setState(
+      Object.assign(this.state.user, {
+        entries: count
+      })
+    );
+  };
 
   onRouteChange = route => {
-    this.setState({ route })
-  }
+    this.setState({ route });
+  };
 
   render() {
-    return (
-      this.state.route === 'home' ?
-        <>
-          <Header onRouteChange={this.onRouteChange} />
-          <PeopleService />
-          <SmartBrain user={this.state.user} updateEntry={this.updateEntry} />
-          <About />
-          <Contact />
-          <Footer />
-        </> :
-        this.state.route === 'signin' ?
-          <Signin onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
-          :
-          <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
-
+    return this.state.route === 'home' ? (
+      <>
+        <Header onRouteChange={this.onRouteChange} />
+        <PeopleService />
+        <SmartBrain user={this.state.user} updateEntry={this.updateEntry} />
+        <About />
+        <Contact />
+        <Footer />
+      </>
+    ) : this.state.route === 'signin' ? (
+      <Signin onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
+    ) : (
+      <Register onRouteChange={this.onRouteChange} loadUser={this.loadUser} />
     );
   }
 }

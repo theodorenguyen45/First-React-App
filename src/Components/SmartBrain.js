@@ -8,8 +8,8 @@ export default class SmartBrain extends Component {
     this.state = {
       input: '',
       imageUrl: '',
-      box: {},
-    }
+      box: {}
+    };
   }
 
   calculateFaceLocation = data => {
@@ -21,21 +21,21 @@ export default class SmartBrain extends Component {
     return {
       leftCol: calrifaiFace.left_col * width,
       topRow: calrifaiFace.top_row * height,
-      rightCol: width - (calrifaiFace.right_col * width),
-      bottomRow: height - (calrifaiFace.bottom_row * height)
-    }
-  }
+      rightCol: width - calrifaiFace.right_col * width,
+      bottomRow: height - calrifaiFace.bottom_row * height
+    };
+  };
 
   displayFaceBox = box => {
-    this.setState({ box })
-  }
+    this.setState({ box });
+  };
 
   onInputChange = event => {
-    this.setState({ input: event.target.value })
-  }
+    this.setState({ input: event.target.value });
+  };
 
   onButtonSubmit = () => {
-    this.setState({ imageUrl: this.state.input })
+    this.setState({ imageUrl: this.state.input });
     fetch('https://guarded-spire-67673.herokuapp.com/imageurl', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
@@ -43,26 +43,30 @@ export default class SmartBrain extends Component {
         input: this.state.input
       })
     })
-    .then(response => response.json())
-    .then(response => {
-      if (response) {
-        this.displayFaceBox(this.calculateFaceLocation(response.outputs[0].data.regions[0].region_info.bounding_box))
-        fetch('https://guarded-spire-67673.herokuapp.com/image', {
-          method: 'PUT',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({
-            id: this.props.user.id
+      .then(response => response.json())
+      .then(response => {
+        if (response) {
+          this.displayFaceBox(
+            this.calculateFaceLocation(
+              response.outputs[0].data.regions[0].region_info.bounding_box
+            )
+          );
+          fetch('https://guarded-spire-67673.herokuapp.com/image', {
+            method: 'PUT',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+              id: this.props.user.id
+            })
           })
-        })
-        .then(res => res.json())
-        .then(count => {
-          this.props.updateEntry(count)
-        })
-        .catch(err => console.log(err))
-      }
-    })
-    .catch(err => console.log(err))
-  }
+            .then(res => res.json())
+            .then(count => {
+              this.props.updateEntry(count);
+            })
+            .catch(err => console.log(err));
+        }
+      })
+      .catch(err => console.log(err));
+  };
 
   render() {
     return (
@@ -72,12 +76,22 @@ export default class SmartBrain extends Component {
           <h3 className='i fw1'>This is a face recognition</h3>
           <Rank name={this.props.user.name} entries={this.props.user.entries} />
           <div className='custom-grid'>
-            <input className='customInput f4 pa3 ba b--green bg-lightest-blue' onChange={this.onInputChange} type="text" placeholder='Image url goes here...' />
-            <button className='grow f4 link ph3 pv2 dib white bg-light-purple mt3 ma0-l ml2-l' onClick={this.onButtonSubmit} >Detect</button>
+            <input
+              className='customInput f4 pa3 ba b--green bg-lightest-blue'
+              onChange={this.onInputChange}
+              type='text'
+              placeholder='Image url goes here...'
+            />
+            <button
+              className='grow f4 link ph3 pv2 dib white bg-light-purple mt3 ma0-l ml2-l'
+              onClick={this.onButtonSubmit}
+            >
+              Detect
+            </button>
           </div>
         </div>
         <FaceRecognition imageUrl={this.state.imageUrl} box={this.state.box} />
       </div>
-    )
+    );
   }
-} 
+}
