@@ -11,7 +11,7 @@ export default ({ imageUrl, boxes }) => (
     />
 
     {boxes.map(box => (
-      <Face box={box} />
+      <Face key={box.topRow} box={box} />
     ))}
   </div>
 )
